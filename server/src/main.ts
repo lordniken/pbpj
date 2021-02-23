@@ -1,10 +1,11 @@
 import { Global, Module, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { config, graphql, postgres } from './utils';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as colors from 'colors';
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 7000;
 
 Promise.all(
   fs.readdirSync(path.join(__dirname, 'modules')).map(async (moduleName) => {
@@ -17,7 +18,7 @@ Promise.all(
 ).then(async (modules) => {
   @Global()
   @Module({
-    imports: [...modules],
+    imports: [...modules, config, graphql, postgres],
     providers: [],
     exports: [],
   })
@@ -27,6 +28,7 @@ Promise.all(
 
   const app = await NestFactory.create(Application);
   app.useGlobalPipes(new ValidationPipe());
+
   await app.listen(port);
 
   console.log(`Server has been started at localhost:${port}`.yellow);
