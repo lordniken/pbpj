@@ -1,8 +1,33 @@
+import { Global, Module, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as colors from 'colors';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
-}
-bootstrap();
+const port = process.env.PORT || 8080;
+
+Promise.all(
+  fs.readdirSync(path.join(__dirname, 'modules')).map(async (moduleName) => {
+    const featureModule = await import(
+      path.join(__dirname, 'modules', moduleName, `${moduleName}.module`)
+    );
+
+    return featureModule.default;
+  }),
+).then(async (modules) => {
+  @Global()
+  @Module({
+    imports: [...modules],
+    providers: [],
+    exports: [],
+  })
+  class Application {}
+
+  colors.enable();
+
+  const app = await NestFactory.create(Application);
+  app.useGlobalPipes(new ValidationPipe());
+  await app.listen(port);
+
+  console.log(`Server has been started at localhost:${port}`.yellow);
+});
