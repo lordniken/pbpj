@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { ApolloError } from 'apollo-server-express';
 import { UserEntity } from 'src/entities';
 import { UserDto } from 'src/dto';
+import { isCorrectUsername } from 'src/utils/validations';
 
 @Injectable()
 export class UserService {
@@ -18,6 +19,8 @@ export class UserService {
     });
 
     if (userExists) throw new ApolloError('EMAIL_ALREADY_EXISTS');
+    if (!isCorrectUsername(data.username))
+      throw new ApolloError('USERNAME_INCORRECT');
 
     const user = await this.usersRepository.create(data);
     await this.usersRepository.save(user);
