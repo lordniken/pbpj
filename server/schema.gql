@@ -2,11 +2,23 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Test {
-  id: ID!
-  str: String
+type Query {
+  test(data: String!): Boolean!
 }
 
-type Query {
-  testReq(arg: String!): Test!
+type Mutation {
+  createUser(data: UserDto!): Boolean!
+}
+
+input UserDto {
+  username: String!
+  email: String!
+  passwordHash: String!
+  role: UserRoleType!
+}
+
+"""variants of UserRoleType"""
+enum UserRoleType {
+  developer
+  designer
 }

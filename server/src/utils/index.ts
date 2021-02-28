@@ -1,6 +1,7 @@
-import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { GraphQLModule } from '@nestjs/graphql';
+import { GraphQLError, GraphQLFormattedError } from 'graphql';
 
 export const config = ConfigModule.forRoot();
 
@@ -8,6 +9,12 @@ export const graphql = GraphQLModule.forRoot({
   debug: false,
   playground: true,
   autoSchemaFile: 'schema.gql',
+  formatError: (error: GraphQLError) => {
+    const graphQLFormattedError: GraphQLFormattedError = {
+      message: error.extensions?.exception?.response?.message || error.message,
+    };
+    return graphQLFormattedError;
+  },
 });
 
 export const postgres = TypeOrmModule.forRoot({
