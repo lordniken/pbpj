@@ -11,8 +11,8 @@ type User {
 }
 
 type Query {
-  me: User!
   auth(data: UserAuthDto!): String!
+  me: User!
 }
 
 input UserAuthDto {

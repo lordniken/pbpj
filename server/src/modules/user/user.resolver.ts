@@ -1,9 +1,9 @@
 import { Args, Mutation, Resolver, Query, Context } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
-import { UserAuthDto, UserRegistrationDto } from 'src/dto';
+import { UserRegistrationDto } from 'src/dto';
 import { User } from 'src/models';
 import { UserService } from './user.service';
-import { AuthGuard } from './user.guard';
+import { AuthGuard } from '../auth/auth.guard';
 @Resolver(() => User)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
@@ -12,13 +12,6 @@ export class UserResolver {
   @UseGuards(new AuthGuard())
   async me(@Context('user') { id }: User): Promise<User> {
     return this.userService.userInfo(id);
-  }
-
-  @Query(() => String)
-  async auth(@Args('data') data: UserAuthDto): Promise<any> {
-    const user = await this.userService.auth(data);
-
-    return this.userService.createToken(user);
   }
 
   @Mutation(() => Boolean)
