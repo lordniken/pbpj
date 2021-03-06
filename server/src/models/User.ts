@@ -1,12 +1,9 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { Expose } from 'class-transformer';
+import { Base } from './Base';
 
 @ObjectType()
-export class User {
-  @Expose()
-  @Field(() => ID)
-  id: string;
-
+export class User extends Base {
   @Expose()
   @Field({ nullable: true })
   username: string;
