@@ -3,14 +3,19 @@
 # ------------------------------------------------------
 
 type Query {
-  test(data: String!): Boolean!
+  auth(data: UserAuthDto!): String!
+}
+
+input UserAuthDto {
+  email: String!
+  passwordHash: String!
 }
 
 type Mutation {
-  createUser(data: UserDto!): Boolean!
+  createUser(data: UserRegistrationDto!): Boolean!
 }
 
-input UserDto {
+input UserRegistrationDto {
   username: String!
   email: String!
   passwordHash: String!

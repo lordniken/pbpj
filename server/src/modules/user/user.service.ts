@@ -3,9 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ApolloError } from 'apollo-server-express';
 import { UserEntity } from 'src/entities';
-import { UserDto } from 'src/dto';
+import { User } from 'src/models';
+import { UserAuthDto, UserRegistrationDto } from 'src/dto';
 import { isCorrectUsername } from 'src/utils/validations';
-
+import * as jwt from 'jsonwebtoken';
 @Injectable()
 export class UserService {
   constructor(
@@ -13,7 +14,15 @@ export class UserService {
     private usersRepository: Repository<UserEntity>,
   ) {}
 
-  async createUser(data: UserDto): Promise<void> {
+  async auth({ email, passwordHash }: UserAuthDto): Promise<User | undefined> {
+    return this.usersRepository.findOne({ email, passwordHash });
+  }
+
+  async createToken({ id }: User): Promise<string> {
+    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  }
+
+  async createUser(data: UserRegistrationDto): Promise<void> {
     const userExists = await this.usersRepository.findOne({
       email: data.email,
     });

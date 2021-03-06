@@ -13,5 +13,13 @@ export class User {
 
   @Expose()
   @Field({ nullable: true })
+  email: string;
+
+  @Expose()
+  @Field({ nullable: true })
+  passwordHash?: string;
+
+  @Expose()
+  @Field({ nullable: true })
   role: string;
 }
