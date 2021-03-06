@@ -1,18 +1,22 @@
-import { Args, Mutation, Resolver, Query } from '@nestjs/graphql';
-import { User } from 'src/models';
+import { Args, Mutation, Resolver, Query, Context } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 import { UserAuthDto, UserRegistrationDto } from 'src/dto';
+import { User } from 'src/models';
 import { UserService } from './user.service';
-import { ApolloError } from 'apollo-server-express';
+import { AuthGuard } from './user.guard';
 @Resolver(() => User)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
+  @Query(() => User)
+  @UseGuards(new AuthGuard())
+  async me(@Context('user') { id }: User): Promise<User> {
+    return this.userService.userInfo(id);
+  }
+
   @Query(() => String)
   async auth(@Args('data') data: UserAuthDto): Promise<any> {
     const user = await this.userService.auth(data);
-    if (!user) {
-      throw new ApolloError('AUTH_FAILED');
-    }
 
     return this.userService.createToken(user);
   }

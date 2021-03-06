@@ -15,6 +15,7 @@ export const graphql = GraphQLModule.forRoot({
     };
     return graphQLFormattedError;
   },
+  context: ({ req }) => ({ headers: req.headers }),
 });
 
 export const postgres = TypeOrmModule.forRoot({
