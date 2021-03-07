@@ -6,6 +6,7 @@ module.exports = {
   context: resolve(__dirname, "../../src"),
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
+    modules: [resolve(__dirname, "../../src"), "node_modules"]
   },
   output: {
     path: resolve(__dirname, 'dist'),
