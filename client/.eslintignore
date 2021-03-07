@@ -1,0 +1,14 @@
+dist/*
+public/*
+config/*
+scripts/*
+node_modules/*
+coverage/*
+allure-*/*
+src/react-app-env.d.ts
+src/serviceWorker.ts
+*/__tests__
+src/components/Grid/*
+src/__tests__/*
+*/**/__tests__/*
+src/test/*
