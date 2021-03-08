@@ -3,7 +3,7 @@ import { FlexBox } from 'components';
 
 const StructPattern: React.FC = ({ children }) => {
   return (
-    <FlexBox alignItems="center" justifyContent="center">
+    <FlexBox alignItems="center" component="header">
       Pattern loaded
       {children}
     </FlexBox>
