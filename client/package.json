@@ -5,6 +5,7 @@
   "scripts": {
     "start": "webpack serve --config=configs/webpack/dev.js",
     "build": "yarn run clean-dist && webpack --config=configs/webpack/prod.js",
+    "format": "prettier src/**/*.{ts,tsx,scss,css,json}",
     "lint": "eslint src/**/*.{ts,tsx}",
     "clean-dist": "rimraf dist/*"
   },

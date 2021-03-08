@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { MuiThemeProvider } from '@material-ui/core';
+import { StructPattern } from 'containers';
 import { useGlobalStyles } from 'hooks';
 import { theme } from 'global';
 import { MainPage } from 'pages';
@@ -11,11 +12,13 @@ const Root: React.FC = () => {
   return (
     <MuiThemeProvider theme={theme}>
       <BrowserRouter>
-        <Switch>
-          <Route>
-            <MainPage />
-          </Route>
-        </Switch>
+        <StructPattern>
+          <Switch>
+            <Route>
+              <MainPage />
+            </Route>
+          </Switch>
+        </StructPattern>
       </BrowserRouter>
     </MuiThemeProvider>
   );
