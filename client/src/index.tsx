@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from 'containers';
+import { RootContainer } from 'containers';
 
 ReactDOM.render(
-  <Root />, document.getElementById('root'),
+  <RootContainer />, document.getElementById('root'),
 );
