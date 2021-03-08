@@ -1,9 +1,11 @@
 import React from 'react';
-import Header from './Header';
+import AppHeader from './Header';
+import AppMenu from './Menu';
 
 const StructPattern: React.FC = ({ children }) => (
   <>
-    <Header />
+    <AppHeader />
+    <AppMenu />
     Pattern loaded
     {children}
   </>
