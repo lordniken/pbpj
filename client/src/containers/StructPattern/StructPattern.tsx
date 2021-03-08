@@ -1,13 +1,12 @@
 import React from 'react';
-import { FlexBox } from 'components';
+import Header from './Header';
 
-const StructPattern: React.FC = ({ children }) => {
-  return (
-    <FlexBox alignItems="center" component="header">
-      Pattern loaded
-      {children}
-    </FlexBox>
-  );
-};
+const StructPattern: React.FC = ({ children }) => (
+  <>
+    <Header />
+    Pattern loaded
+    {children}
+  </>
+);
 
 export default StructPattern;
