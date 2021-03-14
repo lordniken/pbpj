@@ -15,13 +15,13 @@ export const useStyles = makeStyles(
       '& > div': {
         top: 72,
         width: 260
-      },      
+      }
     },
     menuLink: {
       color: theme.palette.text.primary,
       '&:hover': {
-        textDecoration: 'none'
-      },
+        textDecoration: 'none !important'
+      }
     }
   }),
   { name: 'AppAside' }

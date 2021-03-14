@@ -5,8 +5,7 @@ const AppContent: React.FC = ({ children }) => {
   const styles = useStyles();
 
   return (
-    <main>
-      <div className={styles.spacer} />
+    <main className={styles.content}>
       {children}
     </main>
   );

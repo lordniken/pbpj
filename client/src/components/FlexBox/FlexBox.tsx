@@ -1,28 +1,20 @@
 import React from 'react';
-import { Box } from '@material-ui/core';
+import { Box, BoxProps } from '@material-ui/core';
 
-interface IProps extends React.HtmlHTMLAttributes<HTMLElement> {
-  alignItems?: 'normal' | 'flex-start' | 'center' | 'baseline' | 'flex-end' | 'stretch';
-  justifyContent?: 'normal' | 'flex-start' | 'flex-end' | 'center';
+interface IProps extends BoxProps {
   display?: 'flex' | 'inline-flex';
   component?: React.ElementType;
 }
 
 const FlexBox: React.FC<IProps> = (
   { 
-    alignItems = 'normal', 
-    justifyContent = 'normal', 
     display = 'flex',
-    component = 'div',
     children, 
     ...rest
   }
 ) => (
   <Box 
-    display={display} 
-    alignItems={alignItems} 
-    justifyContent={justifyContent} 
-    component={component}
+    display={display}
     {...rest}
   >
     {children}

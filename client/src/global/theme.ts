@@ -1,9 +1,10 @@
 import { createMuiTheme } from '@material-ui/core';
 
 export default createMuiTheme({
-  props: {
-    MuiButtonBase: {
-      disableRipple: true, // No more ripple, on the whole application 💣!
-    },
+  props: {},
+  palette: {
+    background: {
+      default: '#f8f7ff',
+    }
   },
 });
