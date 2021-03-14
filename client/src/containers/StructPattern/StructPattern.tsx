@@ -1,13 +1,14 @@
 import React from 'react';
+import AppContent from './Content';
 import AppHeader from './Header';
-import AppMenu from './Menu';
+import AppAside from './Aside';
 
 const StructPattern: React.FC = ({ children }) => (
   <>
-    <AppHeader />
-    <AppMenu />
-    Pattern loaded
-    {children}
+    <AppAside />
+    <AppContent>
+      {children}
+    </AppContent>
   </>
 );
 

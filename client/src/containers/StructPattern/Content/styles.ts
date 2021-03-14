@@ -6,5 +6,5 @@ export const useStyles = makeStyles(
       ...theme.mixins.toolbar,
     }
   }),
-  { name: 'StructPattern' },
+  { name: 'AppContent' },
 );

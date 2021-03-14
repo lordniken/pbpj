@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core';
 export const useStyles = makeStyles(
   theme => ({
     header: {
-      zIndex: theme.zIndex.drawer + 1
+      // zIndex: theme.zIndex.drawer + 1
     }
   }),
   { name: 'AppHeader' },
